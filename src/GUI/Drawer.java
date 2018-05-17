@@ -36,7 +36,7 @@ public class Drawer extends AnimationTimer {
         }
     }
 
-    public void clear() {
+    private void clear() {
         canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
@@ -58,9 +58,5 @@ public class Drawer extends AnimationTimer {
 
     public void setStopRequest(boolean stopRequest) {
         this.stopRequest = stopRequest;
-    }
-
-    public boolean isRunning() {
-        return running;
     }
 }

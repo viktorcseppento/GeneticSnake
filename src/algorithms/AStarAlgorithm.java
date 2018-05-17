@@ -29,7 +29,7 @@ public class AStarAlgorithm extends Thread {
         long lastUpdated = 0;
 
         while (game.isRunning()) {
-            if(isInterrupted()) {
+            if (isInterrupted()) {
                 game.stop();
                 drawer.stop();
                 break;

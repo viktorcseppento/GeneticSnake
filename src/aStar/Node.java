@@ -7,7 +7,6 @@ public class Node extends Point implements Comparable {
     private int gCost; //Kezdőponttól a távolság
     private int hCost; //Végponttól a távolság
     private Node cameFrom; //A csúcsot tartalmazó útvonalon a csúcs előtti csúcs
-    private boolean explored;
     private boolean obstacle;
 
 
@@ -20,7 +19,6 @@ public class Node extends Point implements Comparable {
     }
 
     void explore(Node cameFrom, Node fruit) {
-        explored = true;
 
         if(cameFrom == null)
             this.gCost = 0;

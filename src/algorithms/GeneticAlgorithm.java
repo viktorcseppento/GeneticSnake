@@ -26,6 +26,7 @@ public class GeneticAlgorithm extends Thread {
     private int noIndividual = 0;
     private int noGeneration = 1;
     private Drawer drawer;
+    private boolean serialize = false;
 
     public GeneticAlgorithm(Canvas canvas, Text generationField, Text individualField, Text scoreField) {
         evolutionConfig = new EvolutionConfig();
@@ -47,8 +48,10 @@ public class GeneticAlgorithm extends Thread {
                 populations.remove(currentGeneration);
                 canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 running = false;
-                Serializer serializer = new Serializer(populations, neuralConfig, gameConfig, evolutionConfig);
-                serializer.serialize();
+                if (serialize) {
+                    Serializer serializer = new Serializer(populations, neuralConfig, gameConfig, evolutionConfig);
+                    serializer.serialize();
+                }
                 break;
             }
 
@@ -131,6 +134,14 @@ public class GeneticAlgorithm extends Thread {
 
     public boolean isRunning() {
         return running;
+    }
+
+    public boolean isSerialize() {
+        return serialize;
+    }
+
+    public void setSerialize(boolean serialize) {
+        this.serialize = serialize;
     }
 }
 

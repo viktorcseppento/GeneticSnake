@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.canvas.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
@@ -40,12 +37,13 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <CheckBox fx:id="geneticSpeedBox" layoutX="383.0" layoutY="320.0" mnemonicParsing="false" onAction="#geneticSpeedAction" text="Max speed" />
+                  <CheckBox fx:id="geneticSpeedBox" layoutX="382.0" layoutY="275.0" mnemonicParsing="false" onAction="#geneticSpeedAction" text="Max speed" />
                   <Text fx:id="geneticScoreField" layoutX="382.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " wrappingWidth="151.615234375">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
+                  <CheckBox fx:id="geneticSerializeBox" layoutX="381.0" layoutY="308.0" mnemonicParsing="false" onAction="#geneticSerializeAction" text="Serialize" />
                </children>
             </AnchorPane>
          </content>
@@ -77,6 +75,24 @@
                </children>
             </AnchorPane>
          </content></Tab>
+      <Tab text="Seed">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Canvas fx:id="seedCanvas" height="371.0" width="371.0" />
+                  <TextField fx:id="seedField" layoutX="398.0" layoutY="219.0" prefHeight="11.0" prefWidth="149.0" />
+                  <Text layoutX="460.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seed" />
+                  <Button fx:id="seedButton" layoutX="452.0" layoutY="266.0" mnemonicParsing="false" onAction="#seedAction" text="Start" />
+                  <Text fx:id="seedErrorText" fill="RED" layoutX="400.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="146.0" />
+                  <Text fx:id="seedScoreText" layoutX="428.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
       <Tab text="Config">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

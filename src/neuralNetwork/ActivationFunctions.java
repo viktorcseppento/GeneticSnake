@@ -6,7 +6,7 @@ import static java.lang.Math.tanh;
 public class ActivationFunctions {
 
 
-    public static double applyActivation(double param, String activation, boolean derivative) throws RuntimeException {
+    static double applyActivation(double param, String activation, boolean derivative) throws RuntimeException {
         switch (activation) {
             case "SIGMOID":
                 return derivative ? sigmoidDerivative(param) : sigmoid(param);
@@ -27,7 +27,7 @@ public class ActivationFunctions {
      * @param param double parameter.
      * @return result.
      */
-    public static double sigmoid(double param) {
+    private static double sigmoid(double param) {
         return 1 / (1 + exp(-param));
     }
 
@@ -37,7 +37,7 @@ public class ActivationFunctions {
      * @param param double parameter.
      * @return result.
      */
-    public static double sigmoidDerivative(double param) {
+    private static double sigmoidDerivative(double param) {
         return exp(param) / ((1 + exp(param)) * (1 + exp(param)));
     }
 
@@ -47,7 +47,7 @@ public class ActivationFunctions {
      * @param param double parameter.
      * @return result.
      */
-    public static double ReLu(double param) {
+    private static double ReLu(double param) {
         return param > 0 ? param : 0;
     }
 
@@ -57,18 +57,8 @@ public class ActivationFunctions {
      * @param param double parameter.
      * @return result.
      */
-    public static double ReLuDerivative(double param) {
+    private static double ReLuDerivative(double param) {
         return param > 0 ? 1 : 0;
-    }
-
-    /**
-     * Tanh activation function.
-     *
-     * @param param double parameter.
-     * @return result.
-     */
-    public double tanH(double param) {
-        return tanh(param);
     }
 
     /**
@@ -77,7 +67,7 @@ public class ActivationFunctions {
      * @param param double parameter.
      * @return result.
      */
-    public static double tanHDerivative(double param) {
+    private static double tanHDerivative(double param) {
         return 1 - tanh(param) * tanh(param);
     }
 }

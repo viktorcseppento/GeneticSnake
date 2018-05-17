@@ -2,21 +2,12 @@ package gameLogic;
 
 import aStar.Node;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
 
 public class Point {
 
     public int x;
     public int y;
-
-    public Point() {
-        this.x = 0;
-        this.y = 0;
-    }
 
     public Point(int x, int y) {
         this.x = x;
@@ -29,7 +20,7 @@ public class Point {
 
     }
 
-    public static Point add(Point p1, Point p2) {
+    static Point add(Point p1, Point p2) {
         return new Point(p1.x + p2.x, p1.y + p2.y);
     }
 
@@ -66,41 +57,17 @@ public class Point {
         }
     }
 
-    void translate(int dx, int dy) {
-        x += dx;
-        y += dy;
-    }
-
     void translate(Point vector) {
         x += vector.x;
         y += vector.y;
-    }
-
-    public void setPoint(Point other) {
-        this.x = other.x;
-        this.y = other.y;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public double diagonalDistanceFromOtherPoint(Point other) {
-        int xDifference = abs(x - other.x);
-        int yDifference = abs(y - other.y);
-        return sqrt(xDifference * xDifference + yDifference * yDifference);
     }
 
     public int absDistanceFromOtherPoint(Point other) {
@@ -118,22 +85,6 @@ public class Point {
             return Direction.DOWN;
         else
             return Direction.UP;
-    }
-
-    boolean intersect(Point other, int diameter) {
-        return diagonalDistanceFromOtherPoint(other) < diameter;
-    }
-
-    void translateOnePixelToTargetPos(Point other) {
-        if (other.x > x)
-            translate(1, 0);
-        else if (other.x < x)
-            translate(-1, 0);
-
-        if (other.y > y)
-            translate(0, 1);
-        else if (other.y < y)
-            translate(0, -1);
     }
 
     @Override

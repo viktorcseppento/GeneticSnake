@@ -3,10 +3,9 @@ package QLearning;
 import neuralNetwork.NeuralConfig;
 import neuralNetwork.NeuralNet;
 
-import java.util.Random;
 
 public class QAgent {
-    NeuralNet net;
+    private NeuralNet net;
 
 
     public QAgent(NeuralNet net) {

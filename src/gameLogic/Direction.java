@@ -1,7 +1,5 @@
 package gameLogic;
 
-import java.util.Random;
-
 public enum Direction {
     UP(0), RIGHT(1), DOWN(2), LEFT(3);
 
@@ -17,11 +15,6 @@ public enum Direction {
 
     public Direction toTheLeft() {
         return Direction.values()[(ID + 3) % 4];
-    }
-
-    public static Direction getRandomDirection(){
-        Random r = new Random();
-        return Direction.values()[r.nextInt(4)];
     }
 
     public Point getVector(){

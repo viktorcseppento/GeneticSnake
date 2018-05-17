@@ -43,8 +43,6 @@ public class Game {
         if (!running)
             return;
 
-        Direction oldDirection = snake.getDirection();
-
         if (snake.getMethod().equals(AIMethod.GENETIC))
             snake.setDirection(evaluateNet());
         else if (snake.getMethod().equals(AIMethod.ASTAR)) {
@@ -53,11 +51,6 @@ public class Game {
         }else if (snake.getMethod().equals(AIMethod.DEEPQ)){
             snake.setDirection(evaluateNet());
         }
-
-        if (oldDirection.toTheLeft().equals(snake.getDirection()))
-            snake.addLeftTurn();
-        if (oldDirection.toTheRight().equals(snake.getDirection()))
-            snake.addRightTurn();
 
         Point oldLast = snake.getLast();
 
@@ -82,7 +75,7 @@ public class Game {
 
         //If hits fruit, get longer and generate a new one
         if (snake.getPoints().get(0).equals(fruit)) {
-            snake.setHealth(200);
+            snake.heal();
             snake.requestNewPoint();
             generateFruit();
         }

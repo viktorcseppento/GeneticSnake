@@ -90,8 +90,4 @@ public class ResultAlgorithm extends Thread {
     public boolean isRunning() {
         return isRunning;
     }
-
-    public void setRunning(boolean running) {
-        isRunning = running;
-    }
 }

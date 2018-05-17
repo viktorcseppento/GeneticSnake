@@ -1,12 +1,12 @@
 package GUI;
 
 import algorithms.AStarAlgorithm;
+import algorithms.SeedAlgorithm;
 import evolution.EvolutionConfig;
 import algorithms.GeneticAlgorithm;
 import algorithms.ResultAlgorithm;
 import gameLogic.GameConfig;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -20,8 +20,70 @@ import java.util.prefs.Preferences;
 
 public class Controller implements Initializable {
 
+    private AStarAlgorithm aStarAlgorithm;
+
+    private GeneticAlgorithm geneticAlgorithm;
+
+    private ResultAlgorithm resultAlgorithm;
+
+    private SeedAlgorithm seedAlgorithm;
+
     @FXML
-    private Tab resultTab;
+    private Canvas geneticCanvas;
+
+    @FXML
+    private Text resultPopSize;
+
+    @FXML
+    private CheckBox geneticSpeedBox;
+
+    @FXML
+    private Button seedButton;
+
+    @FXML
+    private Canvas seedCanvas;
+
+    @FXML
+    private Text geneticIndividualField;
+
+    @FXML
+    private TextField replayField;
+
+    @FXML
+    private TextField elitesText;
+
+    @FXML
+    private ChoiceBox<String> activationBox;
+
+    @FXML
+    private Button geneticButton;
+
+    @FXML
+    private TextField seedField;
+
+    @FXML
+    private TextField popSizeText;
+
+    @FXML
+    private CheckBox geneticSerializeBox;
+
+    @FXML
+    private Text seedErrorText;
+
+    @FXML
+    private Text seedScoreText;
+
+    @FXML
+    private Text aStarScoreField;
+
+    @FXML
+    private Text geneticGenerationField;
+
+    @FXML
+    private Canvas resultCanvas;
+
+    @FXML
+    private Text resultScoreText;
 
     @FXML
     private TextField topologyText;
@@ -30,70 +92,28 @@ public class Controller implements Initializable {
     private TextField mutRateText;
 
     @FXML
-    private Canvas geneticCanvas;
+    private Text resultErrorText;
 
     @FXML
     private TextField mapNameText;
 
     @FXML
-    private CheckBox geneticSpeedBox;
+    private Text geneticScoreField;
 
     @FXML
-    private TextField elitesText;
+    private Tab resultTab;
 
     @FXML
-    private Button geneticButton;
+    private Button replayButton;
 
     @FXML
-    private TextField popSizeText;
+    private Text resultNoGen;
 
     @FXML
     private Canvas aStarCanvas;
 
     @FXML
     private Button aStarButton;
-
-    @FXML
-    private Text aStarScoreField;
-
-    @FXML
-    private Text geneticIndividualField;
-
-    @FXML
-    private Text geneticGenerationField;
-
-    @FXML
-    private Text geneticScoreField;
-
-    private AStarAlgorithm aStarAlgorithm;
-
-    private GeneticAlgorithm geneticAlgorithm;
-
-    private ResultAlgorithm resultAlgorithm;
-
-    @FXML
-    private ChoiceBox<String> activationBox;
-
-    @FXML
-    private Canvas resultCanvas;
-
-    @FXML
-    private Text resultNoGen;
-
-    @FXML
-    private Text resultPopSize;
-
-    @FXML
-    private Text resultScoreText;
-
-    @FXML
-    private Text resultErrorText;
-
-    @FXML
-    private TextField replayField;
-
-    @FXML
-    private Button replayButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,7 +123,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void aStarStartAction(ActionEvent event) {
+    void aStarStartAction() {
         aStarScoreField.setText("Score: ");
         if (aStarAlgorithm != null) {
             aStarButton.setText("Start");
@@ -120,7 +140,29 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void geneticStartAction(ActionEvent event) {
+    void seedAction() {
+        if (seedAlgorithm != null) {
+            seedButton.setText("Start");
+            seedAlgorithm.interrupt();
+            seedAlgorithm = null;
+            seedCanvas.getGraphicsContext2D().clearRect(0, 0, seedCanvas.getWidth(), seedCanvas.getHeight());
+        } else {
+            setPreferences();
+            seedAlgorithm = new SeedAlgorithm(seedCanvas, seedScoreText, seedField.getText());
+            if (seedAlgorithm.getAgent() == null) {
+                seedErrorText.setText("Invalid seed");
+                seedAlgorithm = null;
+                return;
+            }
+            seedButton.setText("Stop");
+            seedAlgorithm.start();
+            seedErrorText.setText("");
+        }
+    }
+
+
+    @FXML
+    void geneticStartAction() {
         if (geneticAlgorithm != null && geneticAlgorithm.isRunning()) {
             geneticButton.setText("Start");
             resultNoGen.setText("Number of generations: " + (geneticAlgorithm.getPopulations().size() - 1));
@@ -134,12 +176,13 @@ public class Controller implements Initializable {
 
             geneticAlgorithm = new GeneticAlgorithm(geneticCanvas, geneticGenerationField, geneticIndividualField, geneticScoreField);
             geneticSpeedBox.setSelected(false);
+            geneticSerializeBox.setSelected(false);
             geneticAlgorithm.start();
         }
     }
 
     @FXML
-    void geneticSpeedAction(ActionEvent event) {
+    void geneticSpeedAction() {
         if (geneticAlgorithm != null) {
             if (geneticSpeedBox.isSelected()) {
                 geneticAlgorithm.setFPS(Integer.MAX_VALUE);
@@ -150,7 +193,18 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void replayAction(ActionEvent event) {
+    void geneticSerializeAction() {
+        if (geneticAlgorithm != null) {
+            if (geneticSerializeBox.isSelected()) {
+                geneticAlgorithm.setSerialize(true);
+            } else {
+                geneticAlgorithm.setSerialize(false);
+            }
+        }
+    }
+
+    @FXML
+    void replayAction() {
         if (!resultAlgorithm.isRunning()) {
             replayButton.setText("Stop");
             resultAlgorithm.start();
@@ -162,6 +216,7 @@ public class Controller implements Initializable {
             resultCanvas.getGraphicsContext2D().clearRect(0, 0, resultCanvas.getWidth(), resultCanvas.getHeight());
         }
     }
+
 
     private void setPreferences() {
         Preferences gamePref = Preferences.userNodeForPackage(GameConfig.class);
