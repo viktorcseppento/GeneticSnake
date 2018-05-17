@@ -6,7 +6,7 @@
 .idea
 *.iml
 *.xls
+*.nn
 out
 /src/TODO
 /src/Thougths
-*.nn
