@@ -16,6 +16,7 @@ public class GameConfig {
         } catch (IOException e) {
             try {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("maps/default.txt"))));
+                mapName = "default.txt";
             } catch (IOException e2) {
                 e.printStackTrace();
                 return;

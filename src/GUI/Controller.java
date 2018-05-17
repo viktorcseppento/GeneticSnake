@@ -142,6 +142,7 @@ public class Controller implements Initializable {
     @FXML
     void seedAction() {
         if (seedAlgorithm != null) {
+            seedScoreText.setText("");
             seedButton.setText("Start");
             seedAlgorithm.interrupt();
             seedAlgorithm = null;

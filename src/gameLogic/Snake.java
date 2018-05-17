@@ -55,12 +55,6 @@ public class Snake {
             fitness*=pow(2, getLen()-3);
         }else
             fitness*=256*(getLen()-7);
-        //  fitness *= min(leftTurns, rightTurns) / (max(leftTurns, rightTurns));
-          /*  if (getLen() > 10)
-                if (max(leftTurns, rightTurns) / (1 + min(leftTurns, rightTurns)) > 2.2)
-                    fitness = 0;
-        */
-
         return fitness;
     }
 

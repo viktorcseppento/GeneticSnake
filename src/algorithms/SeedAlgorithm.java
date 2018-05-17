@@ -13,6 +13,7 @@ import neuralNetwork.NeuralNet;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +42,10 @@ public class SeedAlgorithm extends Thread {
                     Matcher matcher = pattern.matcher(name);
                     if (matcher.find()) {
                         fileName = name;
+                        StringTokenizer st = new StringTokenizer(fileName, "_");
+                        st.nextToken();
+                        seed = st.nextToken();
+                        seed = seed.substring(0, seed.length() - 3);
                         break;
                     }
                 }
@@ -56,7 +61,7 @@ public class SeedAlgorithm extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(neuralNet != null){
+        if (neuralNet != null) {
             return new Agent(neuralNet, Long.valueOf(seed));
         }
         return null;
