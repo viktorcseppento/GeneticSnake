@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
+  <tabs>
+    <Tab text="A*">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Canvas fx:id="aStarCanvas" height="371.0" width="371.0" />
+                  <Button fx:id="aStarButton" layoutX="463.0" layoutY="173.0" mnemonicParsing="false" onAction="#aStarStartAction" text="Start" />
+                  <Text fx:id="aStarScoreField" layoutX="410.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="147.330078125">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content></Tab>
+      <Tab text="Genetic">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Canvas fx:id="geneticCanvas" height="371.0" width="371.0" />
+                  <Button fx:id="geneticButton" layoutX="438.0" layoutY="193.0" mnemonicParsing="false" onAction="#geneticStartAction" text="Start" AnchorPane.leftAnchor="438.0" />
+                  <Text fx:id="geneticGenerationField" layoutX="381.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generation: " wrappingWidth="154.53515625">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="geneticIndividualField" layoutX="382.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Individual: " wrappingWidth="151.615234375">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <CheckBox fx:id="geneticSpeedBox" layoutX="383.0" layoutY="320.0" mnemonicParsing="false" onAction="#geneticSpeedAction" text="Max speed" />
+                  <Text fx:id="geneticScoreField" layoutX="382.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: " wrappingWidth="151.615234375">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="resultTab" disable="true" text="Results">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Canvas fx:id="resultCanvas" height="371.0" width="371.0" />
+                  <TextField fx:id="replayField" layoutX="400.0" layoutY="220.0" />
+                  <Button fx:id="replayButton" layoutX="449.0" layoutY="268.0" mnemonicParsing="false" onAction="#replayAction" text="Replay" />
+                  <Text layoutX="417.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generation-individual" />
+                  <Text fx:id="resultNoGen" layoutX="371.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of generations:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="resultPopSize" layoutX="371.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generation size:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="resultScoreText" layoutX="429.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="resultErrorText" fill="RED" layoutX="402.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="146.0" />
+               </children>
+            </AnchorPane>
+         </content></Tab>
+      <Tab text="Config">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="338.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activation Function" />
+                  <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Population size" />
+                  <Text layoutX="262.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mutation rate" />
+                  <Text layoutX="420.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of elites" />
+                  <Text layoutX="270.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Map name" />
+                  <Text layoutX="151.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hidden layer neurons" />
+                  <TextField fx:id="topologyText" layoutX="146.0" layoutY="76.0" prefHeight="25.0" prefWidth="124.0" text="12" />
+                  <TextField fx:id="popSizeText" layoutX="63.0" layoutY="161.0" prefHeight="25.0" prefWidth="124.0" text="20" />
+                  <TextField fx:id="mutRateText" layoutX="238.0" layoutY="161.0" prefHeight="25.0" prefWidth="124.0" text="0.01" />
+                  <TextField fx:id="elitesText" layoutX="402.0" layoutY="161.0" prefHeight="25.0" prefWidth="124.0" text="1" />
+                  <TextField fx:id="mapNameText" layoutX="238.0" layoutY="290.0" prefHeight="25.0" prefWidth="124.0" text="default" />
+                  <ChoiceBox fx:id="activationBox" layoutX="339.0" layoutY="76.0" prefHeight="25.0" prefWidth="99.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
