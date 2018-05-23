@@ -1,10 +1,12 @@
 package neuralNetwork;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Matrix implements Serializable{
+public class Matrix implements Serializable {
     private final int rows;
     private final int cols;
     private final double data[][];
@@ -63,11 +65,11 @@ public class Matrix implements Serializable{
     /**
      * Sets the element at the specified position in the matrix.
      *
-     * @param row which row.
-     * @param col which column.
+     * @param row  which row.
+     * @param col  which column.
      * @param data new data at the position.
      */
-    public void set(int row, int col, double data){
+    public void set(int row, int col, double data) {
         if (row >= 0 && row < this.rows && col >= 0 && col < this.cols)
             this.data[row][col] = data;
         else
@@ -281,19 +283,19 @@ public class Matrix implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Matrix))
+        if (!(obj instanceof Matrix))
             return false;
 
-        Matrix other = (Matrix)obj;
-        if(this.rows == other.rows && this.cols == other.cols){
+        Matrix other = (Matrix) obj;
+        if (this.rows == other.rows && this.cols == other.cols) {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    if(data[i][j] != other.data[i][j])
+                    if (data[i][j] != other.data[i][j])
                         return false;
                 }
             }
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -320,11 +322,24 @@ public class Matrix implements Serializable{
 
     @Override
     public String toString() {
-        return "Matrix{" +
-                "rows=" + rows +
-                ", cols=" + cols +
-                ", data=" + Arrays.toString(data) +
-                '}';
+        StringBuilder sb = new StringBuilder(3 * cols * rows);
+        sb.append("Dimensions: ");
+        sb.append(rows);
+        sb.append("x");
+        sb.append(cols);
+        sb.append("\n");
+        DecimalFormat numberFormat = new DecimalFormat("0.000");
+        numberFormat.setPositivePrefix("+");
+        for (double[] row : data) {
+            for (int j = 0; j < row.length; j++) {
+                sb.append(numberFormat.format(row[j]));
+                if (j != row.length - 1)
+                    sb.append(" ");
+                else
+                    sb.append("\n");
+            }
+        }
+        return sb.toString();
     }
 }
 

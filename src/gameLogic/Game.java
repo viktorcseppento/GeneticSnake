@@ -94,13 +94,6 @@ public class Game {
         for (int i = 0; i < 25; i++) {
             for (int j = 0; j < 25; j++) {
                 switch (map[i][j]) {
-                    /*case SNAKE:
-                        if(snake.getHead().x == j && snake.getHead().y == i)
-                            gc.setFill(Color.BLUE);
-                        else
-                            gc.setFill(Color.GREEN);
-                        gc.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-                        break;*/
                     case WALL:
                         gc.setFill(Color.BLACK);
                         gc.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
@@ -141,8 +134,9 @@ public class Game {
                 right diagonal wall/snake, right diagonal fruit,
                 right wall/snake right fruit;
         */
-        double[] neuralNetInputs = new double[13];
+        double[] neuralNetInputs = new double[snake.getNet().getTopology()[0]];
 
+        neuralNetInputs[13] = snake.getLen()/100;
         for (int i = 0; i < neuralNetInputs.length; i++) {
             Point discoverer = new Point(snake.getHead());
             Item what = Item.values()[i % 2];
@@ -191,7 +185,7 @@ public class Game {
      * Returns 0, if there is no such item.
      *
      * @param discoverer      specified point.
-     * @param directionVector vector of the specified direction.
+     * @para    m directionVector vector of the specified direction.
      * @param what            specified item.
      * @return the reciprocal of the distance from the point to the item in the direction, 0 if couldn't find the item.
      */
@@ -229,6 +223,8 @@ public class Game {
                     freePlaces.add(new Point(j, i)); //Put the free places to an array list
             }
         }
+        if(freePlaces.size() == 0)
+            return;
         Random r;
         if (!snake.getMethod().equals(AIMethod.ASTAR))
             r = new Random(snake.getBrain().getSeed());

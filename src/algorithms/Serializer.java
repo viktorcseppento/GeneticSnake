@@ -1,5 +1,6 @@
 package algorithms;
 
+import evolution.Agent;
 import evolution.EvolutionConfig;
 import evolution.Population;
 import gameLogic.GameConfig;
@@ -19,6 +20,7 @@ class Serializer {
     private NeuralConfig neuralConfig;
     private GameConfig gameConfig;
     private EvolutionConfig evolutionConfig;
+    private ArrayList<Agent> serializedAgents = new ArrayList<>();
 
     Serializer(ArrayList<Population> populations, NeuralConfig neuralConfig, GameConfig gameConfig, EvolutionConfig evolutionConfig) {
         this.populations = populations;
@@ -42,8 +44,11 @@ class Serializer {
             for (int i = 0; i < populations.size(); i++) {
                 for (int j = 0; j < populations.get(i).getAgents().length; j++) {
                     int fitness = (int) populations.get(i).getAgents()[j].getFitness();
-                    if (fitness < 200)
-                        continue;
+                    if (serializedAgents.size() != 0) {
+                        if (fitness < serializedAgents.get(serializedAgents.size() - 1).getFitness())
+                            continue;
+                    }
+                    serializedAgents.add(populations.get(i).getAgents()[j]);
                     try {
                         FileOutputStream file = new FileOutputStream("neuralNetworks/" + fitness + "_" + populations.get(i).getAgents()[j].getSeed() + ".nn");
                         ObjectOutputStream out = new ObjectOutputStream(file);

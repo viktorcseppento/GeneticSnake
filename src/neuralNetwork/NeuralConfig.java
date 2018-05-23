@@ -19,7 +19,7 @@ public class NeuralConfig {
         for (int i = 1; i < numberOfLayers - 1; i++) {
             topology[i] = Integer.parseInt(st.nextToken());
         }
-        topology[0] = 13; //13 inputs
+        topology[0] = 14; //13 inputs
         topology[numberOfLayers - 1] = 3; //3 outputs
 
         activation = pref.get("activation", "SIGMOID");

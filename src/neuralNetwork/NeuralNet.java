@@ -105,7 +105,7 @@ public class NeuralNet implements java.io.Serializable{
     public void randomize(double lowerBound, double upperBound) {
         for (int i = 1; i < layers.length; i++) {
             layers[i].getWeights().randomize(lowerBound, upperBound);
-            layers[i].getWeights().randomize(lowerBound, upperBound);
+            layers[i].getBiases().randomize(lowerBound, upperBound);
         }
     }
 
@@ -128,7 +128,7 @@ public class NeuralNet implements java.io.Serializable{
      *
      * @return number of weights and biases.
      */
-    private int getNumberOfCoeffs() {
+    public int getNumberOfCoeffs() {
         int sum = 0;
 
         for (Layer l : layers) {
@@ -137,6 +137,14 @@ public class NeuralNet implements java.io.Serializable{
         }
 
         return sum;
+    }
+
+    public Layer[] getLayers() {
+        return layers;
+    }
+
+    public int[] getTopology() {
+        return topology;
     }
 
     @Override

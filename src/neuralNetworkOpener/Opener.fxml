@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:id="splitPane" dividerPositions="0.15577889447236182" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neuralNetworkOpener.Opener">
+   <items>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="399.0">
+         <children>
+            <Text fx:id="errorText" fill="RED" layoutX="50.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.0" />
+            <Button fx:id="openButton" layoutX="448.0" layoutY="10.0" mnemonicParsing="false" onAction="#openAction" text="Open" />
+            <TextField fx:id="fileBox" layoutX="50.0" layoutY="10.0" prefHeight="25.0" prefWidth="382.0" text="neuralNetworks/" />
+            <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Path:" wrappingWidth="35.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="resultPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <Text fx:id="topologyText" layoutX="15.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Topology:" wrappingWidth="149.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="weightText" editable="false" layoutX="167.0" layoutY="31.0" prefHeight="281.0" prefWidth="276.0" />
+            <Text layoutX="266.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weights">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="501.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biases">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="layerBox" layoutX="15.0" layoutY="53.0" onAction="#showLayer" prefWidth="150.0" />
+            <Text layoutX="54.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activation">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="activationText" layoutX="34.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="112.0">
+               <font>
+                  <Font size="16.0" />
+               </font></Text>
+            <TextArea fx:id="biasText" editable="false" layoutX="463.0" layoutY="31.0" prefHeight="281.0" prefWidth="125.0" />
+         </children>
+      </AnchorPane>
+   </items>
+</SplitPane>

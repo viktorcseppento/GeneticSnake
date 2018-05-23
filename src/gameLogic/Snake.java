@@ -15,8 +15,10 @@ public class Snake {
     private ArrayList<Point> points = new ArrayList<>();
     private boolean requestedNewPoint = false;
     private AIMethod method;
-    private int health = 200;
+    private static int maxHealth = 200;
+    private int health = maxHealth;
     private Set<Point> explored = new HashSet<>(); //Explored points
+
     public Snake(AIMethod method, Agent brain) {
         this.brain = brain;
         this.method = method;
@@ -25,7 +27,6 @@ public class Snake {
 
     void move() {
         health--;
-
         Point tail = new Point(getLast());
 
         //Move the tail
@@ -49,12 +50,13 @@ public class Snake {
     }
 
     private double calcFitness() {
-        double fitness = 10*log(10*explored.size());
-
-        if (getLen() < 8){
-            fitness*=pow(2, getLen()-3);
-        }else
-            fitness*=256*(getLen()-7);
+        //Felfedezett blokkok száma
+        double fitness = log(10 * explored.size());
+        //Kígyó hossza
+        if (getLen() < 8) {
+            fitness *= pow(2, getLen() - 3);
+        } else
+            fitness *= 256 * (getLen() - 7);
         return fitness;
     }
 
@@ -99,7 +101,7 @@ public class Snake {
     }
 
     void heal() {
-        this.health = 200;
+        this.health = maxHealth;
     }
 
     public int getLen() {

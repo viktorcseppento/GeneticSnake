@@ -57,27 +57,31 @@ public class Layer implements Serializable{
         return previous;
     }
 
-    Matrix getOutput() {
+    public Matrix getOutput() {
         return output;
     }
 
-    Matrix getWeights() {
+    public Matrix getWeights() {
         return weights;
     }
 
-    Matrix getBiases() {
+    public Matrix getBiases() {
         return biases;
     }
 
-    void setOutput(Matrix output) {
+    public String getActivation() {
+        return activation;
+    }
+
+    public void setOutput(Matrix output) {
         this.output = output;
     }
 
-    void setWeights(Matrix weights) {
+    public void setWeights(Matrix weights) {
         this.weights = weights;
     }
 
-    void setBiases(Matrix biases) {
+    public void setBiases(Matrix biases) {
         this.biases = biases;
     }
 
